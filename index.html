@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Small Heart Big Text</title>
+
+<style>
+    body {
+        background: black;
+        color: #ff4d4d;
+        font-family: monospace;
+        text-align: center;
+    }
+
+    pre {
+        font-size: 16px;   /* BIG text */
+        line-height: 16px;
+        white-space: pre;
+    }
+</style>
+</head>
+<body>
+
+<pre id="heart"></pre>
+
+<script>
+let output = "";
+let phrase = "U Are Gay ";
+
+let y = 1.0;    // smaller heart height
+let x = -1.0;
+
+function draw() {
+    if (y < -1.0) return;
+
+    if (x > 1.0) {
+        output += "\n";
+        x = -1.0;
+        y -= 0.1;   // fewer rows
+    } else {
+        let f = Math.pow(x*x + y*y - 1, 3) - x*x*y*y*y;
+
+        if (f <= 0) {
+            output += phrase;
+        } else {
+            output += " ".repeat(phrase.length);
+        }
+
+        x += 0.1;   // fewer columns → SMALL shape
+    }
+
+    document.getElementById("heart").textContent = output;
+
+    setTimeout(draw, 15);
+}
+
+draw();
+</script>
+
+</body>
+</html>
